@@ -1,0 +1,6 @@
+.vscode
+.DS_Store
+
+# executables
+train-assistant
+train-assistant.exe
