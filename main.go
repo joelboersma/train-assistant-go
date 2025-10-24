@@ -140,10 +140,11 @@ func main() {
 		printError(err)
 		os.Exit(1)
 	}
-	fmt.Println(availablePlayValues, dominoes)
+	// TODO: debug log
+
 	trainTrees := getTrainTrees(availablePlayValues, dominoes)
-	fmt.Println(trainTrees)
+	// TODO: debug log
+
 	longestTrains := getLongestTrains(trainTrees)
 	fmt.Println(longestTrains)
-	// TODO: pretty print
 }
