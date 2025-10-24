@@ -13,7 +13,7 @@ func parseStringOfInts(s string) ([]int, error) {
 	for _, num := range strings.Fields(s) {
 		numInt, err := strconv.Atoi(num)
 		if err != nil || numInt > 12 {
-			return nil, errors.New(fmt.Sprintf("Invalid domino value: %v", num))
+			return nil, fmt.Errorf("invalid domino value: %v", num)
 		}
 		nums = append(nums, numInt)
 	}
@@ -26,7 +26,7 @@ func parseDomino(s string) (Domino, error) {
 		return Domino{}, err
 	}
 	if len(nums) != 2 {
-		return Domino{}, errors.New(fmt.Sprintf("Expected 2 values for line '%v'", s))
+		return Domino{}, fmt.Errorf("expected 2 values for line '%v'", s)
 	}
 	return Domino{nums[0], nums[1]}, nil
 }
@@ -39,7 +39,7 @@ func readTrainFile(filename string) (availablePlayValues []int, dominoes []Domin
 
 	lines := strings.Split(string(content), "\n")
 	if len(lines) < 2 {
-		return nil, nil, errors.New("Expected at least two lines")
+		return nil, nil, errors.New("expected at least two lines")
 	}
 
 	availablePlayValues, err = parseStringOfInts(lines[0])
@@ -47,7 +47,7 @@ func readTrainFile(filename string) (availablePlayValues []int, dominoes []Domin
 		return nil, nil, err
 	}
 	if len(availablePlayValues) == 0 {
-		return nil, nil, errors.New("No available play values given")
+		return nil, nil, errors.New("no available play values given")
 	}
 
 	dominoLines := lines[1:]
@@ -62,7 +62,7 @@ func readTrainFile(filename string) (availablePlayValues []int, dominoes []Domin
 		dominoes = append(dominoes, domino)
 	}
 	if len(dominoes) == 0 {
-		return nil, nil, errors.New("No dominoes found")
+		return nil, nil, errors.New("no dominoes found")
 	}
 
 	return availablePlayValues, dominoes, nil
@@ -70,10 +70,10 @@ func readTrainFile(filename string) (availablePlayValues []int, dominoes []Domin
 
 func getFileNameFromArgs() string {
 	if len(os.Args) == 1 {
-		printError(errors.New("Must specify a filepath for the game state"))
+		printError(errors.New("must specify a filepath for the game state"))
 	}
 	if len(os.Args) > 2 {
-		printError(errors.New("Too many arguments"))
+		printError(errors.New("too many arguments"))
 	}
 	return os.Args[1]
 }
