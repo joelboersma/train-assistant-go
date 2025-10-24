@@ -145,4 +145,5 @@ func main() {
 	fmt.Println(trainTrees)
 	longestTrains := getLongestTrains(trainTrees)
 	fmt.Println(longestTrains)
+	// TODO: pretty print
 }
